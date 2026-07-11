@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 // Replace this with your GitHub raw file URL, e.g.:
 // https://raw.githubusercontent.com/<user>/<repo>/<branch>/path/to/video.mp4
-const GITHUB_VIDEO_URL = "https://raw.githubusercontent.com/<user>/<repo>/branch/path/to/video.mp4";
+const GITHUB_VIDEO_URL = "https://raw.githubusercontent.com/imravi05/prank-repo-/7aa4f664dbd4b42048000904ed90dbcc2632f459/src/video/Video-67.mp4";
 
 export default function CuteOrHorrorPrank() {
   const [isPranked, setIsPranked] = useState(false);
