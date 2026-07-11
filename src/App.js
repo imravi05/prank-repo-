@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-// Insert your YouTube embed link here
-const YOUTUBE_HORROR_LINK = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0&modestbranding=1";
+// Replace this with your GitHub raw file URL, e.g.:
+// https://raw.githubusercontent.com/<user>/<repo>/<branch>/path/to/video.mp4
+const GITHUB_VIDEO_URL = "https://raw.githubusercontent.com/<user>/<repo>/branch/path/to/video.mp4";
 
 export default function CuteOrHorrorPrank() {
   const [isPranked, setIsPranked] = useState(false);
@@ -58,7 +59,7 @@ export default function CuteOrHorrorPrank() {
     {/* Falling Petals */}
     <div style={styles.petalContainer}>
       <div style={{ ...styles.petal, left: '5%', animationDelay: '0s', animationDuration: '6s' }}>🌸</div>
-      <div style={{ ...styles.petal, left: '20%', animationDelay: '0.8s', animationDuration: '8s' }}>🌸</div>
+      <div style={{ ...styles.petal, left: '20%', animationDelay: '0.7s', animationDuration: '8s' }}>🌸</div>
       <div style={{ ...styles.petal, left: '40%', animationDelay: '0.3s', animationDuration: '7s' }}>🌸</div>
       <div style={{ ...styles.petal, left: '60%', animationDelay: '1.2s', animationDuration: '9s' }}>🌸</div>
       <div style={{ ...styles.petal, left: '75%', animationDelay: '0.5s', animationDuration: '6s' }}>🌸</div>
@@ -92,14 +93,15 @@ export default function CuteOrHorrorPrank() {
           <h1 style={{ ...styles.horrorTitle, ...currentTheme.titleFont }}>
             YOU SHOULD NOT HAVE CLICKED.
           </h1>
-          <iframe
+          <video
             style={styles.video}
-            src={YOUTUBE_HORROR_LINK}
+            src={GITHUB_VIDEO_URL}
             title="Surprise"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-            allowFullScreen
-          ></iframe>
+            controls
+            autoPlay
+            playsInline
+            muted
+          />
           <button 
             style={styles.resetButton} 
             onClick={() => setIsPranked(false)}
