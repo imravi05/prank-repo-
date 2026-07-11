@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 // Replace this with your GitHub raw file URL, e.g.:
 // https://raw.githubusercontent.com/<user>/<repo>/<branch>/path/to/video.mp4
@@ -6,11 +6,22 @@ const GITHUB_VIDEO_URL = "https://raw.githubusercontent.com/imravi05/prank-repo-
 
 export default function CuteOrHorrorPrank() {
   const [isPranked, setIsPranked] = useState(false);
+  const videoRef = useRef(null);
+  const [isMuted, setIsMuted] = useState(true);
+  const [afterVideo, setAfterVideo] = useState(false);
+
+  const handleVideoEnded = () => {
+    setIsMuted(false);
+    setAfterVideo(true);
+    if (videoRef.current) {
+      try { videoRef.current.muted = false; } catch (e) {}
+    }
+  };
 
   const currentTheme = isPranked ? horrorColors : funnyColors;
 
   return (
-    <div style={{ ...styles.container, ...currentTheme.background }}>
+    <div style={{ ...styles.container, ...currentTheme.background, ...(afterVideo ? styles.afterVideoBackground : {}) }}>
       
       {/* Dynamic Keyframes injected into the document head */}
       <style>
@@ -89,19 +100,22 @@ export default function CuteOrHorrorPrank() {
       ) : (
         // * * * HORROR AFTER SCREEN * * *
         <div style={styles.videoContainer}>
-          <div style={styles.horrorStaticOverlay}></div>
+          <div style={{ ...styles.horrorStaticOverlay, ...(afterVideo ? styles.horrorOverlayAfter : {}) }}></div>
           <h1 style={{ ...styles.horrorTitle, ...currentTheme.titleFont }}>
-            YOU SHOULD NOT HAVE CLICKED.
+            A GIFT FROM RAVI......
           </h1>
           <video
-            style={styles.video}
+            ref={videoRef}
+            style={{ ...styles.video, ...(afterVideo ? styles.videoAfter : {}) }}
             src={GITHUB_VIDEO_URL}
             title="Surprise"
             controls
             autoPlay
             playsInline
-            muted
+            muted={isMuted}
+            onEnded={handleVideoEnded}
           />
+          
           <button 
             style={styles.resetButton} 
             onClick={() => setIsPranked(false)}
